@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.InputSystem.UI;
 
 namespace OnlyWar {
   public sealed class OnlyWarRuntimeUIBuilder : MonoBehaviour {
@@ -25,7 +26,8 @@ namespace OnlyWar {
       if(FindFirstObjectByType<EventSystem>()==null){
         var es=new GameObject("EventSystem");
         es.AddComponent<EventSystem>();
-        es.AddComponent<StandaloneInputModule>();
+        var module=es.AddComponent<InputSystemUIInputModule>();
+        module.AssignDefaultActions();
       }
       var cg=new GameObject("OnlyWar UI");
       canvas=cg.AddComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=50;
@@ -129,7 +131,7 @@ namespace OnlyWar {
     Text Label(string name,Transform parent,string value,Vector2 anchor,Vector2 pos,float w,float h,int size,TextAnchor align){
       var g=new GameObject(name);g.transform.SetParent(parent,false);
       var r=g.AddComponent<RectTransform>();r.anchorMin=r.anchorMax=anchor;r.sizeDelta=new Vector2(w,h);r.anchoredPosition=pos;
-      var t=g.AddComponent<Text>();t.text=value;t.font=font?font:Resources.GetBuiltinResource<Font>("Arial.ttf");t.fontSize=size;t.alignment=align;t.color=Color.white;t.raycastTarget=false;return t;
+      var t=g.AddComponent<Text>();t.text=value;t.font=font?font:Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");t.fontSize=size;t.alignment=align;t.color=Color.white;t.raycastTarget=false;return t;
     }
 
     Button Button(string name,Transform parent,string label,Vector2 anchor,Vector2 pos,float w,float h,UnityEngine.Events.UnityAction action){
