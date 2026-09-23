@@ -25,7 +25,7 @@ namespace OnlyWar {
     IEnumerator Routine(OnlyWarDamageable d){
       yield return new WaitForSeconds(respawnDelay);
       var s=Choose(d.team);if(s)d.transform.SetPositionAndRotation(s.position,s.rotation);
-      d.gameObject.SetActive(true);
+      d.Revive();
     }
   }
 }

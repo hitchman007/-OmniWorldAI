@@ -69,12 +69,11 @@ namespace OnlyWar.Editor {
       player.AddComponent<OnlyWarMantleSlide>().input=input;
       player.AddComponent<OnlyWarAimAssist>().input=input;
       player.AddComponent<OnlyWarGyroAim>().input=input;
-      player.AddComponent<OnlyWarEquipmentController>().input=input;
+      var equip=player.AddComponent<OnlyWarEquipmentController>();equip.input=input;equip.throwOrigin=camGo.transform;
 
       var weaponSocket=new GameObject("WeaponSocket").transform;weaponSocket.SetParent(camGo.transform);weaponSocket.localPosition=Vector3.zero;
-      var fpFactory=systems.AddComponent<OnlyWarFirstPersonRigFactory>();fpFactory.materials=mats;
-      var fpRig=fpFactory.Build(camGo.transform,"ARX-41");
-      var weaponAnim=player.AddComponent<OnlyWarWeaponAnimator>();weaponAnim.input=input;weaponAnim.weaponRoot=fpRig.transform;
+      var fpFactory=systems.AddComponent<OnlyWarFirstPersonRigFactory>();fpFactory.materials=mats;fpFactory.BuildHands(camGo.transform);
+      var weaponAnim=player.AddComponent<OnlyWarWeaponAnimator>();weaponAnim.input=input;weaponAnim.weaponRoot=weaponSocket;
 
       var wc=player.AddComponent<OnlyWarWeaponController>();wc.input=input;wc.aimCamera=cam;wc.weaponSocket=weaponSocket;
       wc.loadout=new[]{

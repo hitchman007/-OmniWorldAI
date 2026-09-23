@@ -40,7 +40,22 @@ namespace OnlyWar {
       StopAllCoroutines(); reloading = false;
       mag = Current.magazine; reserve = Current.reserve;
       if (viewModel) Destroy(viewModel);
-      if (Current.firstPersonPrefab && weaponSocket) viewModel = Instantiate(Current.firstPersonPrefab, weaponSocket);
+      if (weaponSocket) {
+        if (Current.firstPersonPrefab) {
+          viewModel = Instantiate(Current.firstPersonPrefab, weaponSocket);
+        } else {
+          var factory=FindFirstObjectByType<OnlyWarProceduralWeaponFactory>();
+          if(factory){
+            viewModel=factory.Build(Current.weaponId);
+            viewModel.transform.SetParent(weaponSocket,false);
+            viewModel.transform.localPosition=new Vector3(.06f,-.07f,-.18f);
+            viewModel.transform.localRotation=Quaternion.Euler(0,180f,0);
+          }
+        }
+        var old=weaponSocket.Find("MuzzleSocket");if(old)Destroy(old.gameObject);
+        var muzzle=new GameObject("MuzzleSocket").transform;muzzle.SetParent(weaponSocket,false);muzzle.localPosition=new Vector3(.06f,-.07f,-1.75f);
+        muzzleSocket=muzzle;
+      }
     }
 
     void Fire() {

@@ -23,6 +23,14 @@ namespace OnlyWar {
       }
     }
 
+    public void Revive(float healthPercent=1f,float armorValue=100f){
+      health=maxHealth*Mathf.Clamp01(healthPercent);
+      armor=Mathf.Max(0,armorValue);
+      gameObject.SetActive(true);
+    }
+
+    void OnEnable(){if(health<=0)Revive();}
+
     public float Health01 => maxHealth <= 0 ? 0 : health / maxHealth;
   }
 }
