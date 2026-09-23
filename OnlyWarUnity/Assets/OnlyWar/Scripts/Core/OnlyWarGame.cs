@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace OnlyWar {
-  public enum GameMode { TeamStrike, Frontline, SearchDestroy, KillConfirmed, Hardpoint, BattleRoyale, Extraction }
+  public enum GameMode { TeamStrike, Frontline, SearchDestroy, KillConfirmed, Hardpoint, FreeForAll, Control, PvEOperations, BattleRoyale, Extraction }
   public enum QualityTier { Low, Medium, High, Ultra }
 
   public sealed class OnlyWarGame : MonoBehaviour {

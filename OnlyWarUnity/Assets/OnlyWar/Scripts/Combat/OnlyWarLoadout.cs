@@ -19,6 +19,10 @@ namespace OnlyWar {
     public string tactical = "FLASH";
     public string lethal = "FRAG";
     public string fieldUpgrade = "DEPLOYABLE_COVER";
+    public string perk1 = "LIGHTWEIGHT";
+    public string perk2 = "GHOST";
+    public string perk3 = "DEADEYE";
+    public string operatorSkill = "KINETIC_SHIELD";
     public string scorestreak1 = "UAV";
     public string scorestreak2 = "DRONE";
     public string scorestreak3 = "AIRSTRIKE";
