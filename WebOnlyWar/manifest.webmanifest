@@ -1,1 +1,1 @@
-{"name":"OnlyWar — Tactical Open Combat","short_name":"OnlyWar","start_url":"/","display":"fullscreen","orientation":"landscape","background_color":"#05070a","theme_color":"#05070a","description":"Original tactical open-combat FPS built on the OmniWorld foundation."}
+{"name":"OnlyWar — Tactical Open Combat","short_name":"OnlyWar","start_url":"./","scope":"./","display":"fullscreen","orientation":"landscape","background_color":"#05070a","theme_color":"#05070a","description":"Original tactical open-combat FPS built on the OmniWorld foundation."}
