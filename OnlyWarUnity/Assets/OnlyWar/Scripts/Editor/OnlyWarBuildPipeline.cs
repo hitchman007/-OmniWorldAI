@@ -7,50 +7,39 @@ using UnityEngine;
 
 namespace OnlyWar.Editor {
   public static class OnlyWarBuildPipeline {
-    const string Scene="Assets/OnlyWar/Scenes/OnlyWar_ProceduralCombat.unity";
-    const string Root="Builds/OnlyWar";
+    static string[] Scenes(){
+      string[] preferred={
+        "Assets/OnlyWar/Scenes/OnlyWar_RiftHarbor.unity",
+        "Assets/OnlyWar/Scenes/OnlyWar_AetherDistrict.unity",
+        "Assets/OnlyWar/Scenes/OnlyWar_IronDunes.unity",
+        "Assets/OnlyWar/Scenes/OnlyWar_Main.unity"
+      };
+      foreach(var s in preferred)if(File.Exists(s))return new[]{s};
+      return Array.ConvertAll(EditorBuildSettings.scenes,x=>x.path);
+    }
+
+    [MenuItem("OnlyWar/Build/Windows Test")]
+    public static void Windows()=>Build(BuildTarget.StandaloneWindows64,"Builds/Windows/OnlyWar.exe");
 
     [MenuItem("OnlyWar/Build/WebGL Test")]
-    public static void BuildWebGL()=>Build(BuildTarget.WebGL,Root+"/WebGL",BuildOptions.None);
-
-    [MenuItem("OnlyWar/Build/Windows x64")]
-    public static void BuildWindows()=>Build(BuildTarget.StandaloneWindows64,Root+"/Windows/OnlyWar.exe",BuildOptions.None);
+    public static void WebGL()=>Build(BuildTarget.WebGL,"Builds/WebGL");
 
     [MenuItem("OnlyWar/Build/Android APK")]
-    public static void BuildAndroid(){
-      PlayerSettings.Android.targetArchitectures=AndroidArchitecture.ARM64;
-      EditorUserBuildSettings.buildAppBundle=false;
-      Build(BuildTarget.Android,Root+"/Android/OnlyWar.apk",BuildOptions.None);
-    }
-
-    [MenuItem("OnlyWar/Build/Android AAB")]
-    public static void BuildAndroidBundle(){
-      PlayerSettings.Android.targetArchitectures=AndroidArchitecture.ARM64;
-      EditorUserBuildSettings.buildAppBundle=true;
-      Build(BuildTarget.Android,Root+"/Android/OnlyWar.aab",BuildOptions.None);
-    }
+    public static void Android()=>Build(BuildTarget.Android,"Builds/Android/OnlyWar.apk");
 
     [MenuItem("OnlyWar/Build/iOS Xcode")]
-    public static void BuildIOS(){
-      Directory.CreateDirectory(Root+"/iOS");
-      Build(BuildTarget.iOS,Root+"/iOS",BuildOptions.None);
-    }
+    public static void IOS()=>Build(BuildTarget.iOS,"Builds/iOS");
 
-    public static void CIWebGL(){OnlyWarProductionBootstrap.Build();OnlyWarBuildConfigurator.Configure();BuildWebGL();}
-    public static void CIWindows(){OnlyWarProductionBootstrap.Build();OnlyWarBuildConfigurator.Configure();BuildWindows();}
-    public static void CIAndroid(){OnlyWarProductionBootstrap.Build();OnlyWarBuildConfigurator.Configure();BuildAndroid();}
-    public static void CIIOS(){OnlyWarProductionBootstrap.Build();OnlyWarBuildConfigurator.Configure();BuildIOS();}
+    public static void CIWebGL()=>WebGL();
+    public static void CIWindows()=>Windows();
+    public static void CIAndroid()=>Android();
 
-    static void Build(BuildTarget target,string path,BuildOptions options){
-      if(!File.Exists(Scene))OnlyWarProductionBootstrap.Build();
-      OnlyWarBuildValidator.ValidateOrThrow();
-      Directory.CreateDirectory(Path.GetDirectoryName(path)??Root);
-      var report=BuildPipeline.BuildPlayer(new BuildPlayerOptions{
-        scenes=new[]{Scene},locationPathName=path,target=target,options=options
-      });
-      if(report.summary.result!=BuildResult.Succeeded)
-        throw new Exception($"OnlyWar {target} build failed: {report.summary.result} / {report.summary.totalErrors} errors");
-      Debug.Log($"OnlyWar {target} build OK: {path} ({report.summary.totalSize} bytes)");
+    static void Build(BuildTarget target,string path){
+      Directory.CreateDirectory(Path.GetDirectoryName(path)??path);
+      var o=new BuildPlayerOptions{scenes=Scenes(),locationPathName=path,target=target,options=BuildOptions.None};
+      BuildReport r=BuildPipeline.BuildPlayer(o);
+      Debug.Log($"OnlyWar build {target}: {r.summary.result} size={r.summary.totalSize} warnings={r.summary.totalWarnings} errors={r.summary.totalErrors}");
+      if(r.summary.result!=BuildResult.Succeeded)throw new Exception("OnlyWar build failed: "+r.summary.result);
     }
   }
 }
