@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#05070a">
+<title>WALKIE — Android</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#05070a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+body{display:flex;align-items:center;justify-content:center;padding:28px}
+.card{width:min(560px,100%);text-align:center;padding:34px 24px;border:1px solid #1e2b38;border-radius:28px;background:linear-gradient(180deg,#0b1118,#06090d);box-shadow:0 20px 70px #0008}
+.logo{font-size:42px;font-weight:900;letter-spacing:.06em}.tag{margin-top:8px;color:#7ce8a6;font-weight:700;letter-spacing:.08em;font-size:13px}
+.status{margin:28px 0 18px;color:#dce6ef;font-size:17px;line-height:1.45}
+.btn{display:block;width:100%;padding:18px 20px;border-radius:18px;background:#2276ff;color:#fff;text-decoration:none;font-weight:800;font-size:18px;border:0}
+.note{margin-top:18px;color:#94a3b4;font-size:13px;line-height:1.5}
+.ios,.other{display:none}.mini{margin-top:22px;color:#6f8193;font-size:12px}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="logo">WALKIE</div>
+  <div class="tag">OFF-GRID · SIN INTERNET</div>
+
+  <section class="android">
+    <div class="status">Versión Android lista para instalar.</div>
+    <a class="btn" href="https://raw.githubusercontent.com/hitchman007/-OmniWorldAI/walkie-distribution/WALKIE.apk">DESCARGAR E INSTALAR</a>
+    <div class="note">Android puede pedir permiso para instalar desde el navegador la primera vez. WALKIE no requiere Google Play.</div>
+  </section>
+
+  <section class="ios">
+    <div class="status">Estás usando un iPhone. El archivo APK es solo para Android y no puede instalarse en iOS.</div>
+    <div class="note">Abre este mismo enlace desde un teléfono Android para instalar WALKIE.</div>
+  </section>
+
+  <section class="other">
+    <div class="status">WALKIE está disponible actualmente para Android.</div>
+    <a class="btn" href="https://raw.githubusercontent.com/hitchman007/-OmniWorldAI/walkie-distribution/WALKIE.apk">DESCARGAR APK</a>
+  </section>
+
+  <div class="mini">WALKIE 1.1.0</div>
+</main>
+<script>
+(function(){
+  const ua=navigator.userAgent||"";
+  const isAndroid=/Android/i.test(ua);
+  const isIOS=/iPhone|iPad|iPod/i.test(ua) || (navigator.platform==="MacIntel" && navigator.maxTouchPoints>1);
+  document.querySelector(".android").style.display=isAndroid?"block":"none";
+  document.querySelector(".ios").style.display=isIOS?"block":"none";
+  document.querySelector(".other").style.display=(!isAndroid&&!isIOS)?"block":"none";
+})();
+</script>
+</body>
+</html>
