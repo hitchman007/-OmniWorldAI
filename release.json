@@ -1,0 +1,12 @@
+{
+  "app": "WALKIE",
+  "version": "1.4.0",
+  "versionCode": 6,
+  "packageName": "com.walkie.offgrid.production",
+  "minAndroid": "6.0",
+  "minSdk": 23,
+  "targetSdk": 36,
+  "sha256": "986C865A1A3C810BB091BC0850FE383A69924FBB5C618F3C6D2263049F5823CA",
+  "signingCertificateSha256": "7BC720EF0EA4282FC0D8E4DE8189D1AF75E7902B6A605F7A95AC91DF54E0C860",
+  "apk": "https://raw.githubusercontent.com/hitchman007/-OmniWorldAI/0d7ad5f62f549a09206b7d9e9edbe69d2ff24915/WALKIE-1.4.0.apk"
+}
