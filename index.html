@@ -14,11 +14,13 @@ body{display:flex;align-items:center;justify-content:center;padding:24px}
 .card{width:min(560px,100%);text-align:center;padding:34px 24px;border:1px solid #1e2b38;border-radius:28px;background:linear-gradient(180deg,#0b1118,#06090d);box-shadow:0 20px 70px #0008}
 .logo{font-size:42px;font-weight:900;letter-spacing:.06em}.tag{margin-top:8px;color:#7ce8a6;font-weight:700;letter-spacing:.08em;font-size:13px}
 .status{margin:28px 0 18px;color:#dce6ef;font-size:17px;line-height:1.45}
-.btn{display:block;width:100%;padding:18px 20px;border-radius:18px;background:#2276ff;color:#fff;text-decoration:none;font-weight:800;font-size:18px}
+.btn{display:block;width:100%;padding:18px 20px;border-radius:18px;background:#2276ff;color:#fff;text-decoration:none;font-weight:800;font-size:18px;border:0}
 .note{margin-top:18px;color:#94a3b4;font-size:13px;line-height:1.55}
 .box{margin-top:18px;padding:18px;border-radius:18px;background:#0b121a;border:1px solid #1d2a38}
-.android,.ios,.other{display:none}.fallback{display:block}
-.mini{margin-top:24px;color:#6f8193;font-size:12px}
+.steps{text-align:left;margin-top:18px;padding:18px;border-radius:18px;background:#0b121a;border:1px solid #1d2a38;color:#dce6ef;line-height:1.5}
+.step{display:flex;gap:12px;margin:12px 0;align-items:flex-start}.n{flex:0 0 28px;height:28px;border-radius:50%;background:#1f6fff;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff}
+.ok{margin-top:16px;color:#7ce8a6;font-weight:700;font-size:13px}
+.android,.ios,.other{display:none}.fallback{display:block}.mini{margin-top:24px;color:#6f8193;font-size:12px}
 </style>
 </head>
 <body>
@@ -40,9 +42,17 @@ body{display:flex;align-items:center;justify-content:center;padding:24px}
   </section>
 
   <section class="android">
-    <div class="status">Android detectado. WALKIE 1.4.1 está listo para instalar · Android 6 o superior.</div>
+    <div class="status">WALKIE 1.4.1 está listo para instalar · Android 6 o superior.</div>
     <a class="btn" href="https://raw.githubusercontent.com/hitchman007/-OmniWorldAI/472b2ae00fb90eff29c46e425d0cc6a03806c069/WALKIE-1.4.1.apk">DESCARGAR E INSTALAR</a>
-    <div class="note">Android puede pedir permiso para instalar desde este navegador la primera vez. No requiere Google Play.</div>
+
+    <div class="steps">
+      <div class="step"><div class="n">1</div><div>Si Chrome avisa <b>“Es posible que el archivo sea dañino”</b>, toca <b>Descargar de todos modos</b>.</div></div>
+      <div class="step"><div class="n">2</div><div>Cuando termine la descarga, toca <b>Abrir</b> o entra en <b>Chrome → Descargas</b> y toca WALKIE.</div></div>
+      <div class="step"><div class="n">3</div><div>Si Android dice que Chrome no puede instalar apps desconocidas, toca <b>Configuración</b>, activa <b>Confiar en esta fuente</b> y vuelve atrás.</div></div>
+      <div class="step"><div class="n">4</div><div>Toca <b>Instalar</b>. Play Protect puede analizar el APK; la versión publicada está firmada y registrada.</div></div>
+    </div>
+    <div class="ok">✓ Probado: descarga + instalación correcta desde Chrome en Android 13.</div>
+    <div class="note">Android exige autorización por navegador para APK instalados fuera de Google Play. Ese permiso no puede ser eliminado por una página web.</div>
   </section>
 
   <section class="ios">
@@ -58,7 +68,7 @@ body{display:flex;align-items:center;justify-content:center;padding:24px}
     <a class="btn" href="https://raw.githubusercontent.com/hitchman007/-OmniWorldAI/472b2ae00fb90eff29c46e425d0cc6a03806c069/WALKIE-1.4.1.apk">DESCARGAR APK</a>
   </section>
 
-  <div class="mini">WALKIE 1.4.1</div>
+  <div class="mini">WALKIE 1.4.1 · com.walkie.offgrid.production</div>
 </main>
 <script>
 (function(){
